@@ -426,6 +426,16 @@ namespace WalletWasabi.Services
 
 		public static FilterModel GetStartingFilter(Network network)
 		{
+			// todopw: segwit start block - try regtest 
+			if (network.Name == "chaincoin-reg")
+			{
+				return FilterModel.FromLine("257e7c9daa44d3030c719da42b186a68db305743220923f0d8093dad3daf03c2", GetStartingHeight(network));
+			}
+			if (network.Name == "chaincoin-main") // todopw: additional info after :
+			{
+				return FilterModel.FromLine("0000000002296c27b6061bc0a22cf45c0157cdf8bab8e51fcbdee8b2e4320f9d", GetStartingHeight(network));
+			}
+
 			if (network == Network.Main)
 			{
 				return FilterModel.FromLine("0000000000000000001c8018d9cb3b742ef25114f27563e3fc4a1902167f9893:02832810ec08a0", GetStartingHeight(network));
@@ -436,8 +446,10 @@ namespace WalletWasabi.Services
 			}
 			if (network == Network.RegTest)
 			{
+			
 				return FilterModel.FromLine("0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206", GetStartingHeight(network));
 			}
+			
 			throw new NotSupportedException($"{network} is not supported.");
 		}
 
@@ -501,6 +513,7 @@ namespace WalletWasabi.Services
 
 		public Money GetFeeRate(int feeTarget)
 		{
+			// todopw: generates null exception
 			return AllFeeEstimate.GetFeeRate(feeTarget);
 		}
 

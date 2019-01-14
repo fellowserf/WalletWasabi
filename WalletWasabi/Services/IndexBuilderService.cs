@@ -97,6 +97,17 @@ namespace WalletWasabi.Services
 
 		public static Height GetStartingHeight(Network network) // First possible bech32 transaction ever.
 		{
+			// todopw: segwit start block - try regtest 
+			if (network.Name  == "chaincoin-reg")
+			{
+				return new Height(0);
+			}
+
+			if (network.Name == "chaincoin-main")
+			{
+				return new Height(1572480); 
+			}
+
 			if (network == Network.Main)
 			{
 				return new Height(481824);
@@ -109,7 +120,8 @@ namespace WalletWasabi.Services
 			{
 				return new Height(0);
 			}
-			throw new NotSupportedException($"{network} is not supported.");
+			
+				throw new NotSupportedException($"{network} is not supported.");
 		}
 
 		public Height StartingHeight => GetStartingHeight(RpcClient.Network);

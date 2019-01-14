@@ -801,7 +801,9 @@ namespace WalletWasabi.Services
 			Money feePerBytes = null;
 			using (var client = new WasabiClient(Synchronizer.WasabiClient.TorClient.DestinationUri, Synchronizer.WasabiClient.TorClient.TorSocks5EndPoint))
 			{
-				Money feeRate = Synchronizer.GetFeeRate(feeTarget);
+
+				// todopw: revert Money feeRate = Synchronizer.GetFeeRate(feeTarget);
+				Money feeRate = 2; // todopw: remove
 				Money sanityCheckedFeeRate = Math.Max(feeRate, 2); // Use the sanity check that under 2 satoshi per bytes should not be displayed. To correct possible rounding errors.
 				feePerBytes = new Money(sanityCheckedFeeRate);
 			}

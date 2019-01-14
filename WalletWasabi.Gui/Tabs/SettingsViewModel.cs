@@ -86,8 +86,14 @@ namespace WalletWasabi.Gui.Tabs
 			Dispatcher.UIThread.Post(async () =>
 			{
 				await config.LoadFileAsync();
+				var network = NBitcoin.Network.GetNetwork(Network);  
+				// todopw: allow CHC regtest -- not quite 
+				//if (network == null)
+				//{
+				//	network = NBitcoin.Altcoins.AltNetworkSets.Chaincoin.Regtest;
+				//}
+				// todopw: allow CHC regtest
 
-				var network = NBitcoin.Network.GetNetwork(Network);
 				var torHost = TorHost;
 				var torSocks5Port = int.TryParse(TorPort, out var port) ? (int?)port : null;
 

@@ -200,12 +200,21 @@ namespace WalletWasabi.Gui
 			MemPoolService = new MemPoolService();
 			connectionParameters.TemplateBehaviors.Add(new MemPoolBehavior(MemPoolService));
 
-			if (Network == Network.RegTest)
+			if (Network == Network.RegTest | Network.Name == "chaincoin-reg") //todopw: extend 
 			{
 				Nodes = new NodesGroup(Network, requirements: Constants.NodeRequirements);
 				try
 				{
-					Node node = Node.Connect(Network.RegTest, new IPEndPoint(IPAddress.Loopback, 18444));
+					// todopw: extend
+					Node node;
+					if (Network.Name == "chaincoin-reg")
+					{
+						node = Node.Connect(NBitcoin.Altcoins.Chaincoin.Instance.Regtest, new IPEndPoint(IPAddress.Loopback, 18444));
+					}
+					else
+					{
+						node = Node.Connect(Network.RegTest, new IPEndPoint(IPAddress.Loopback, 18444));
+					}
 					Nodes.ConnectedNodes.Add(node);
 
 					RegTestMemPoolServingNode = Node.Connect(Network.RegTest, new IPEndPoint(IPAddress.Loopback, 18444));
@@ -224,6 +233,7 @@ namespace WalletWasabi.Gui
 				RegTestMemPoolServingNode = null;
 			}
 
+			// todopw: Error UpdateChecker just chc - No connection could be made because the target machine actively refused it 127.0.0.1:37127
 			Synchronizer = new WasabiSynchronizer(Network, IndexFilePath, Config.GetCurrentBackendUri(), Config.GetTorSocks5EndPoint());
 
 			UpdateChecker = new UpdateChecker(Synchronizer.WasabiClient);
@@ -238,7 +248,7 @@ namespace WalletWasabi.Gui
 			}
 
 			var requestInterval = TimeSpan.FromSeconds(30);
-			if (Network == Network.RegTest)
+			if (Network == Network.RegTest || Network.Name == "chaincoin-reg")  // todopw: extend
 			{
 				requestInterval = TimeSpan.FromSeconds(5);
 			}

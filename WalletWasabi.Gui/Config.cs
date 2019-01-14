@@ -187,12 +187,13 @@ namespace WalletWasabi.Gui
 		{
 			AssertFilePathSet();
 
-			Network = Network.Main;
+			//Network = Network.RegTest;// todopw: "chaincoin-reg" NBitcoin.Altcoins.Chaincoin.Instance.Regtest;
+			Network = NBitcoin.Altcoins.Chaincoin.Instance.Regtest;
 
-			MainNetBackendUriV3 = "http://wasabiukrxmkdgve5kynjztuovbg43uxcbcxn6y2okcrsg7gb6jdmbad.onion/";
-			TestNetBackendUriV3 = "http://testwnp3fugjln6vh5vpj7mvq3lkqqwjj3c2aafyu7laxz42kgwh2rad.onion/";
-			MainNetFallbackBackendUri = "https://wasabiwallet.io/";
-			TestNetFallbackBackendUri = "https://wasabiwallet.co/";
+			MainNetBackendUriV3 = "http://chcwau123456789.onion/"; // todopw: onion
+			TestNetBackendUriV3 = "http://testchcau123456789.onion/";
+			MainNetFallbackBackendUri = "https://chcwasabi.io/"; 
+			TestNetFallbackBackendUri = "https://chcwasabi.co/";
 			RegTestBackendUriV3 = "http://localhost:37127/";
 
 			MainNetBlindingRsaPubKey = "16421152619146079007287475569112871971988560541093277613438316709041030720662622782033859387192362542996510605015506477964793447620206674394713753349543444988246276357919473682408472170521463339860947351211455351029147665615454176157348164935212551240942809518428851690991984017733153078846480521091423447691527000770982623947706172997649440619968085147635776736938871139581019988225202983052255684151711253254086264386774936200194229277914886876824852466823571396538091430866082004097086602287294474304344865162932126041736158327600847754258634325228417149098062181558798532036659383679712667027126535424484318399849";
