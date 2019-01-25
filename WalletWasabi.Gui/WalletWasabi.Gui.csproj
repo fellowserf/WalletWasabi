@@ -54,6 +54,8 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="NBitcoin" Version="4.1.1.79" />
+    <PackageReference Include="NBitcoin.Altcoins" Version="1.0.1.35" />
   </ItemGroup>
 
   <ItemGroup>
